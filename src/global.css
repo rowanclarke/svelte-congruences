@@ -4,7 +4,7 @@ html, body {
 	height: 100%;
 }
 
-body {
+body, pre {
 	color: #333;
 	margin: 0;
 	padding: 8px;
@@ -60,4 +60,8 @@ button:not(:disabled):active {
 
 button:focus {
 	border-color: #666;
+}
+
+.label {
+	padding-left: 10px;
 }

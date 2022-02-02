@@ -1,18 +1,19 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const sveltePreprocess = require('svelte-preprocess');
 
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 
 module.exports = {
 	entry: {
-		'build/bundle': ['./src/main.js']
+		'build/bundle': ['./src/main.ts']
 	},
 	resolve: {
 		alias: {
 			svelte: path.dirname(require.resolve('svelte/package.json'))
 		},
-		extensions: ['.mjs', '.js', '.svelte'],
+		extensions: ['.mjs', '.js', '.ts', '.svelte'],
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
@@ -31,7 +32,8 @@ module.exports = {
 							dev: !prod
 						},
 						emitCss: prod,
-						hotReload: !prod
+						hotReload: !prod,
+							preprocess: sveltePreprocess({ sourceMap: !prod })
 					}
 				}
 			},
@@ -59,6 +61,6 @@ module.exports = {
 	],
 	devtool: prod ? false : 'source-map',
 	devServer: {
-		hot: true
+		hot: true,
 	}
 };
